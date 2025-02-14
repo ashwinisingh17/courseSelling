@@ -1,20 +1,31 @@
+const { Router } = require("express");
 
-function createCourseRoutes(app) {
+const courseRouter = Router();
 
-    app.post("/course/purchase", function(req, res) {
-        // you would expect the user to pay you money
-        res.json({
-            message: "signup endpoint"
-        })
+// courseRouter.post("/signup", function(req, res) {
+//     res.json({
+//         message: "signup endpoint"
+//     })
+// })
+
+// courseRouter.post("/signin", function(req, res) {
+//     res.json({
+//         message: "signup endpoint"
+//     })
+// })
+
+courseRouter.post("/purchases", function(req, res) {
+    res.json({
+        message: "Purchased"
     })
+})
 
-    app.get("/course/preview", function(req, res) {
-        res.json({
-            message: "signup endpoint"
-        })
+
+courseRouter.get("/preview", function(req, res) {
+    res.json({
+        message: "course preview endpoint"
     })
-}
-
+})
 module.exports = {
-    createCourseRoutes: createCourseRoutes
+    courseRouter: courseRouter
 }
