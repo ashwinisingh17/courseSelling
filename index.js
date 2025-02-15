@@ -1,5 +1,6 @@
 const express = require("express");
 const { userRouter } = require("./routes/user");
+const { adminRouter } = require("./routes/admin");
 const { courseRouter } = require("./routes/course");
 const app = express();
 
@@ -10,5 +11,7 @@ const app = express();
 // createCourseRoutes(app);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/course", courseRouter);
+app.use("/api/v1/admin", adminRouter);
 
 app.listen(3000);
+
