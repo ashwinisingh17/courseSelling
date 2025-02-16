@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const adminRouter = Router();
-
 // can make account
 adminRouter.post("/signup", function(req, res) {
     res.json({
