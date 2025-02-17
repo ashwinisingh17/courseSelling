@@ -4,6 +4,9 @@ const { adminRouter } = require("./routes/admin");
 const { courseRouter } = require("./routes/course");
 const app = express();
 
+// it parses incoming JSON (string in HTTP request body) into a JavaScript object/.
+app.use(express.json());
+
 // app.use("/user", userRouter);
 //  app.use("/course", courseRouter);
 
