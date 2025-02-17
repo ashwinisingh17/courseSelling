@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-console.log("conneted to")
-// this should be await function 
-mongoose.connect("")
+// console.log("conneted to")
+// // this should be await function 
+// mongoose.connect("")
 
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Types.ObjectId;
