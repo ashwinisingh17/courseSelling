@@ -2,7 +2,9 @@ const { Router } = require("express");
 const adminRouter = Router();
 const { adminModel } = require("../db");
 const jwt = require("jsonwebtoken");
-const JWT_ADMIN_PASSWORD = "alfahdfoiaish1y234q323423";
+
+const  { JWT_ADMIN_PASSWORD } = require("../config");
+const { adminMiddleware } = require("../middleware/admin");
 
 // can make account
 adminRouter.post("/signup", async function(req, res) {
@@ -44,9 +46,23 @@ adminRouter.post("/signin", async function(req, res) {
 })
 
 // can add the courses
-adminRouter.post("/course", function(req, res) {
+adminRouter.post("/course",adminMiddleware, async function(req, res) {
+    const adminId = req.userId;
+    const { title, description, imageUrl, price } = req.body;
+
+    // creating a web3 saas in 6 hours
+
+    const course = await courseModel.create({
+        title: title, 
+        description: description, 
+        imageUrl: imageUrl, 
+        price: price, 
+        creatorId: adminId
+    })
+
     res.json({
-        message: "signup endpoint"
+         message: "Course created",
+        courseId: course._id
     })
 })
 
