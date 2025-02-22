@@ -1,5 +1,6 @@
 const { Router } = require("express");
-
+const { userMiddleware } = require("../middleware/user");
+const { purchaseModel, courseModel } = require("../db")
 const courseRouter = Router();
 
 // courseRouter.post("/signup", function(req, res) {
@@ -14,16 +15,27 @@ const courseRouter = Router();
 //     })
 // })
 
-courseRouter.post("/purchases", function(req, res) {
+courseRouter.post("/purchases",userMiddleware, async function(req, res) {
+     const userId = req.userId;
+    const courseId = req.body.courseId;
+
+    // should check that the user has actually paid the price
+    await purchaseModel.create({
+        userId,
+        courseId
+    })
+   
     res.json({
-        message: "Purchased"
+        message:"You have successfully bought the course"
     })
 })
 
-
-courseRouter.get("/preview", function(req, res) {
+// no reqirement of validating user 
+courseRouter.get("/preview", async function(req, res) {
+    // all courses 
+    const courses=await courseModel.find({})
     res.json({
-        message: "course preview endpoint"
+        courses
     })
 })
 module.exports = {
