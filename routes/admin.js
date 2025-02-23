@@ -67,17 +67,41 @@ adminRouter.post("/course",adminMiddleware, async function(req, res) {
 })
 
 // can update courses which was made by him
-adminRouter.put("/course", function(req, res) {
+adminRouter.put("/course",adminMiddleware,async function(req, res) {
+    const adminId = req.userId;
+
+    const { title, description, imageUrl, price, courseId } = req.body;
+
+    // creating a web3 saas se image Ko store karna sikhna h
+
+    const course = await courseModel.updateOne({
+        _id: courseId, 
+        // creatorID is neccessary so that admin only change in its own course 
+        // other wise he can change others course which will evantually cause error in our system 
+        creatorId: adminId 
+    }, {
+        title: title, 
+        description: description, 
+        imageUrl: imageUrl, 
+        price: price
+    })
     res.json({
-        message: "signup endpoint"
+        message:"Course Updated",
+        courseId:courseId
     })
 })
 
 
 // can get all courses by made by hime
-adminRouter.get("/course/bulk", function(req, res) {
+adminRouter.get("/course/bulk", async function(req, res) {
+     const adminId = req.userId;
+    const courses = await courseModel.find({
+        creatorId: adminId 
+    });
+
     res.json({
-        message: "signup endpoint"
+        message: "Course updated",
+        courses
     })
 })
 
