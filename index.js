@@ -2,6 +2,7 @@ const express = require("express");
 const { userRouter } = require("./routes/user");
 const { adminRouter } = require("./routes/admin");
 const { courseRouter } = require("./routes/course");
+
 const app = express();
 require('dotenv').config()
 // it parses incoming JSON (string in HTTP request body) into a JavaScript object/.
